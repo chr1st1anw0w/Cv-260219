@@ -15,10 +15,10 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({ exp }) => {
   return (
     <div className="relative pl-8 group">
       {/* Timeline Line */}
-      <div className="absolute left-[5px] top-2 bottom-0 w-[1px] bg-gray-200 dark:bg-gray-800 group-last:bottom-auto group-last:h-full"></div>
+      <div className="absolute left-[5px] top-2 bottom-0 w-[0.5px] bg-gray-200 dark:bg-gray-800 group-last:bottom-auto group-last:h-full"></div>
       
       {/* Timeline Dot */}
-      <div className={`absolute left-0 top-2 w-[11px] h-[11px] rounded-full border-2 border-white dark:border-card-dark z-10 transition-colors duration-300 ${
+      <div className={`absolute left-0 top-2 w-[11px] h-[11px] rounded-full border-2 border-white dark:border-black z-10 transition-colors duration-300 ${
         exp.isHighlight ? 'bg-primary shadow-glow' : 'bg-gray-200 dark:bg-gray-600 group-hover:bg-primary'
       }`}></div>
 
@@ -51,7 +51,7 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({ exp }) => {
               transition={{ duration: 0.3 }}
               className="overflow-hidden"
             >
-              <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl p-4 mb-4 border border-gray-100 dark:border-gray-700">
+              <div className="bg-gray-50/50 dark:bg-black/20 rounded-xl p-4 mb-4 border border-gray-100 dark:border-gray-700">
                 <ul className="space-y-2">
                   {exp.achievements.map((achievement, i) => (
                     <li key={i} className="text-sm text-text-secondary-light dark:text-text-secondary-dark flex items-start gap-2">

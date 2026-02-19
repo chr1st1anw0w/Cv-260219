@@ -45,7 +45,21 @@ const ResumeExpert: React.FC<ResumeExpertProps> = ({ content, language, onUpdate
     const applySummary = (type: 'ats' | 'brand') => {
         if (result?.summaryRewrite) {
             const text = type === 'ats' ? result.summaryRewrite.atsVersion : result.summaryRewrite.brandVersion;
-            onUpdate('personalInfo.summary', text);
+            onUpdate('personalInfo.summary', text, true);
+        }
+    };
+
+    const applySkill = (skill: string) => {
+        const newSkills = [...content.skills];
+        if (newSkills.length > 0) {
+            // Add to first category if not exists
+            const exists = newSkills[0].skills.some(s =>
+                (typeof s === "string" ? s : s.name).toLowerCase() === skill.toLowerCase()
+            );
+            if (!exists) {
+                newSkills[0].skills = [...newSkills[0].skills, skill];
+                onUpdate("skills", newSkills, true);
+            }
         }
     };
 
@@ -76,7 +90,7 @@ const ResumeExpert: React.FC<ResumeExpertProps> = ({ content, language, onUpdate
             ...newExperienceArray[expIndex],
             achievements: newBullets
         };
-        onUpdate('experience', newExperienceArray);
+        onUpdate('experience', newExperienceArray, true);
     };
 
     const ScoreGauge = ({ score }: { score: number }) => {
@@ -361,7 +375,7 @@ const ResumeExpert: React.FC<ResumeExpertProps> = ({ content, language, onUpdate
                                         <div className="space-y-3">
                                             {result.skillAlignment?.addOrEmphasize?.map((item: any, i: number) => (
                                                 <div key={i} className="p-3 bg-green-50 dark:bg-green-900/10 rounded-lg">
-                                                    <div className="font-bold text-xs text-gray-900 dark:text-white mb-1">{item.skill}</div>
+                                                    <div className="flex justify-between items-start mb-1"><div className="font-bold text-xs text-gray-900 dark:text-white">{item.skill}</div><button onClick={() => applySkill(item.skill)} className="text-[9px] bg-green-100 text-green-700 px-1.5 py-0.5 rounded hover:bg-green-200 transition-colors">Add</button></div>
                                                     <p className="text-[10px] text-gray-500">{item.reason}</p>
                                                 </div>
                                             ))}

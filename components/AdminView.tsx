@@ -86,12 +86,12 @@ const AdminView: React.FC<AdminViewProps> = ({
     setTimeout(() => setSuccessMsg(null), 3000);
   };
 
-  const updateLocal = (section: string, value: any) => {
+  const updateLocal = (section: string, value: any, shouldSync: boolean = false) => {
       // Helper for deep nested updates
       const newContent = JSON.parse(JSON.stringify(localContent));
       const langData = newContent[editLang];
       
-      const keys = section.split('.');
+      const keys = section.split(".");
       let target = langData;
       for(let i=0; i<keys.length-1; i++) {
           target = target[keys[i]];
@@ -99,6 +99,9 @@ const AdminView: React.FC<AdminViewProps> = ({
       target[keys[keys.length-1]] = value;
       
       setLocalContent(newContent);
+      if (shouldSync) {
+          onContentChange(newContent);
+      }
   };
 
   const handleThemeUpdate = (newTheme: CustomTheme) => {
@@ -199,15 +202,15 @@ const AdminView: React.FC<AdminViewProps> = ({
   );
 
   return (
-    <div className="flex flex-col h-screen bg-[#F3F4F6] font-sans text-black overflow-hidden relative">
+    <div className="flex flex-col h-screen bg-gray-50 dark:bg-black font-sans text-black overflow-hidden relative">
         <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
 
         <div className="flex-1 flex flex-col h-full overflow-hidden relative z-10">
             {/* Top Bar */}
-            <div className="bg-white/80 backdrop-blur-md border-b border-gray-200 shadow-sm flex items-center justify-between px-4 py-3 z-20 shrink-0">
+            <div className="bg-white/80 dark:bg-black/80 backdrop-blur-md border-b border-gray-200 shadow-sm flex items-center justify-between px-4 py-3 z-20 shrink-0">
                 <div className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                    <span className="text-xs font-bold uppercase tracking-wider text-gray-500">Admin OS</span>
+                    <span className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Portfolio OS</span>
                 </div>
                 <div className="flex items-center gap-3">
                     {onExit && <button onClick={onExit} className="p-2 rounded-full hover:bg-red-50 text-gray-400 hover:text-red-500 transition-colors"><LogOut size={16} /></button>}

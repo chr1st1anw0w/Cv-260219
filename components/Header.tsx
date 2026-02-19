@@ -101,7 +101,7 @@ const Header: React.FC<HeaderProps> = ({
   return (
     <header className={`sticky top-0 z-50 transition-all duration-300 ${
       isScrolled
-        ? 'bg-white/80 dark:bg-background-dark/80 backdrop-blur-md shadow-sm py-2'
+        ? 'bg-white/80 dark:bg-background-dark/80 backdrop-blur-xl shadow-sm py-2'
         : 'bg-transparent py-4'
     }`}>
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -183,7 +183,7 @@ const Header: React.FC<HeaderProps> = ({
                         onClick={() => setThemeDropdownOpen(!themeDropdownOpen)}
                         className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold transition-all ${
                             isGlass
-                                ? 'bg-white/50 text-gray-700 border border-white/60 shadow-sm backdrop-blur-md hover:bg-white/70'
+                                ? 'bg-white/50 text-gray-700 border border-white/60 shadow-sm backdrop-blur-xl hover:bg-white/70'
                                 : 'bg-white dark:bg-card-dark border border-gray-100 dark:border-gray-700 text-gray-600 dark:text-gray-200 hover:text-black dark:hover:text-white'
                         } ${themeDropdownOpen ? 'ring-2 ring-primary/20 border-primary' : ''}`}
                      >

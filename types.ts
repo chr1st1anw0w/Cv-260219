@@ -16,6 +16,16 @@ export interface ColorPalette {
   }
 }
 
+export interface LayoutTokens {
+    containerWidth: number;
+    gridColumns: number;
+    gridGap: number;
+    sectionPadding: number;
+    componentPadding: number;
+    bentoStrategy: "dense" | "loose" | "staggered";
+    alignment: "left" | "center" | "right";
+}
+
 export interface DesignSystem {
     borderRadius: number; // in px
     spacingScale: number; // multiplier 0.8 - 1.5
@@ -32,6 +42,7 @@ export interface CustomTheme extends ColorPalette {
     sourceImage?: string;
     layoutPreference?: Partial<LayoutConfig>;
     designSystem?: DesignSystem;
+    layoutTokens?: LayoutTokens;
 }
 
 export interface StyleAnalysis {
@@ -223,6 +234,7 @@ export interface LayoutConfig {
   customThemes?: CustomTheme[];
   customPalette?: ColorPalette;
   designSystem?: DesignSystem;
+    layoutTokens?: LayoutTokens;
   mobile?: MobileLayoutConfig; // New Mobile Schema
   gridColumns?: number; // New: Desktop grid columns
   gridSnap?: boolean; // New: Desktop grid snapping

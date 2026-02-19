@@ -13,6 +13,62 @@ export interface DesignStyle {
 
 export const STYLES_DB: DesignStyle[] = [
     {
+        name: "Cyberpunk Terminal",
+        keywords: ["hacker", "terminal", "neon", "glitch", "retro-future"],
+        bestFor: ["Developers", "Security Experts", "Gamers"],
+        colors: ["#00FF41", "#0D0208", "#003B00", "#008F11"],
+        description: "Classic terminal aesthetic with neon matrix green, mono fonts, and retro scanline effects.",
+        cssParams: { borderRadius: 0, spacingScale: 0.9, shadowStrength: "glow", iconStyle: "thin" }
+    },
+    {
+        name: "Node Flow",
+        keywords: ["node", "canvas", "system", "workflow", "connected"],
+        bestFor: ["Engineers", "Product Managers", "Systems Thinkers"],
+        colors: ["#137FEC", "#050505", "#FFFFFF", "#808080"],
+        description: "Node-based canvas style with connected elements and technical precision.",
+        cssParams: { borderRadius: 4, spacingScale: 1.0, shadowStrength: "hard", iconStyle: "bold" }
+    },
+    {
+        name: "Aura Glass",
+        keywords: ["glass", "blur", "glow", "gradient", "soft"],
+        bestFor: ["AI Platforms", "Creative Portfolios", "Modern SaaS"],
+        colors: ["#7C3BED", "#0A0A0A", "#FFFFFF", "#A78BFA"],
+        description: "High-end glassmorphism with deep blurs, atmospheric glows, and vibrant gradients.",
+        cssParams: { borderRadius: 24, spacingScale: 1.2, shadowStrength: "glass", iconStyle: "thin" }
+    },
+    {
+        name: "Fintech Precision",
+        keywords: ["fintech", "corporate", "clean", "trust", "sharp"],
+        bestFor: ["Finance", "Enterprise", "Consulting"],
+        colors: ["#0F172A", "#F8FAFC", "#1E293B", "#64748B"],
+        description: "Ultra-clean, professional aesthetic with high information density and sharp geometry.",
+        cssParams: { borderRadius: 2, spacingScale: 0.8, shadowStrength: "soft", iconStyle: "standard" }
+    },
+    {
+        name: "Creative Bento",
+        keywords: ["bento", "grid", "blocks", "cards", "modern"],
+        bestFor: ["Designers", "Artists", "Content Creators"],
+        colors: ["#D4FF3F", "#000000", "#FFFFFF", "#F3F4F6"],
+        description: "Playful yet structured grid-based design using the popular Bento layout pattern.",
+        cssParams: { borderRadius: 32, spacingScale: 1.1, shadowStrength: "medium", iconStyle: "bold" }
+    },
+    {
+        name: "Swiss Brutalism",
+        keywords: ["swiss", "brutalist", "typography", "grid", "bold"],
+        bestFor: ["Editorial", "Architecture", "Design Agencies"],
+        colors: ["#FF3E00", "#FFFFFF", "#000000", "#808080"],
+        description: "Bold typography, strict grids, and raw layout inspired by Swiss design and neubrutalism.",
+        cssParams: { borderRadius: 0, spacingScale: 1.3, shadowStrength: "none", iconStyle: "thin" }
+    },
+    {
+        name: "Minimalist High-Tech",
+        keywords: ["tech", "minimalist", "neon", "precision", "dark", "futuristic"],
+        bestFor: ["AI Platforms", "Engineering", "Cybersecurity", "Modern Portfolios"],
+        colors: ["#D4FF3F", "#050505", "#FFFFFF", "#808080"],
+        description: "High precision, ultra-thin lines, neon accents, deep blacks, and monospace typography.",
+        cssParams: { borderRadius: 8, spacingScale: 0.9, shadowStrength: "glow", iconStyle: "thin" }
+    },
+    {
         name: "Minimalism & Swiss Style",
         keywords: ["clean", "simple", "functional", "white space", "grid", "essential"],
         bestFor: ["SaaS", "Enterprise", "Documentation", "Professional"],
