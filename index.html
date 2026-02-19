@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Rule #68: Viewport Meta -->
+    <title>Christian Wu - Product & Design Strategy</title>
+    <meta name="description" content="Portfolio of Christian Wu, a Multidisciplinary Designer & Manager." />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Minimal Polyfill for process.env if accessed directly via window
+      if (typeof window !== 'undefined' && !window.process) {
+        window.process = {
+          env: {
+            NODE_ENV: 'development'
+          }
+        };
+      }
+
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Outfit"', 'sans-serif'],
+              serif: ['"Roboto"', 'serif'],
+              mono: ['"IBM Plex Mono"', 'monospace'],
+            },
+            colors: {
+              primary: "var(--color-primary)", 
+              "primary-hover": "var(--color-primary-hover)",
+              "background-light": "var(--color-bg-light)", 
+              "background-dark": "var(--color-bg-dark)", 
+              "card-light": "var(--color-card-light)",
+              "card-dark": "var(--color-card-dark)",
+              "text-light": "var(--color-text-light)",
+              "text-dark": "var(--color-text-dark)",
+              
+              // Fintech / Neo-Brutalist Palette
+              brand: {
+                volt: '#D4FF3F',
+                black: '#000000',
+                gray: {
+                    50: '#F9FAFB',
+                    100: '#F3F4F6',
+                    500: '#6B7280',
+                    900: '#111827'
+                },
+                slate: '#6366F1' // Slate Blue for charts
+              },
+              
+              "neo-bg": "#EBEBEB",
+              "neo-charcoal": "#333333",
+              "neo-yellow": "#F7F187",
+              "neo-lime": "#E2F197",
+              "neo-glass": "rgba(255, 255, 255, 0.7)",
+              "neo-glass-border": "rgba(255, 255, 255, 0.4)",
+            },
+            boxShadow: {
+              'soft': 'var(--shadow-sm)',
+              'glow': '0 0 20px var(--color-primary)',
+              'neo': '4px 4px 0px 0px rgba(0,0,0,1)',
+              'premium': '0 20px 40px -5px rgba(0, 0, 0, 0.1)',
+            },
+            borderRadius: {
+                'card': 'var(--radius-card, 16px)',
+                'input': '12px'
+            },
+            animation: {
+              'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+      :root {
+        /* Base Palette - TweakCN High End (Light) */
+        /* Primary: Royal Blue */
+        --color-primary: rgb(72, 102, 255);
+        --color-primary-hover: rgb(58, 82, 204);
+        --color-primary-rgb: 72, 102, 255;
+        
+        /* Backgrounds: Clean White */
+        --color-bg-light: rgb(255, 255, 255);
+        --color-bg-dark: rgb(61, 61, 61);
+        
+        /* Surfaces */
+        --color-card-light: rgb(255, 255, 255);
+        --color-card-dark: rgb(33, 33, 33);
+        
+        /* Typography: High Contrast Grey */
+        --color-text-light: rgb(69, 69, 69);
+        --color-text-dark: rgb(255, 255, 255);
+        
+        --color-text-sec-light: rgb(110, 110, 110);
+        --color-text-sec-dark: rgb(180, 180, 180);
+
+        /* Design System Defaults */
+        --radius-card: 16px;
+        --spacing-scale: 1;
+        --font-scale: 1;
+
+        /* Modern Shadows (TweakCN) */
+        --shadow-xs: 0px 1px 2px rgba(0, 0, 0, 0.05);
+        --shadow-sm: 0px 6.5px 14px 0px hsl(0 0% 0% / 0.13), 0px 1px 2px -1px hsl(0 0% 0% / 0.13);
+        --shadow-md: 0px 12px 24px -4px rgba(0, 0, 0, 0.08);
+      }
+      
+      .dark {
+         /* Primary: Electric Cyan/Blue */
+         --color-primary: rgb(61, 184, 255);
+         --color-primary-hover: rgb(50, 150, 210);
+         --color-primary-rgb: 61, 184, 255;
+         
+         --color-bg-light: rgb(61, 61, 61); /* In dark mode, bg-light maps to dark bg */
+         
+         --shadow-sm: 0px 4px 6px -1px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(0,0,0,0.1);
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(0,0,0,0.2);
+      }
+      .dark ::-webkit-scrollbar-thumb {
+        background: rgba(255,255,255,0.1);
+      }
+      .dark ::-webkit-scrollbar-thumb:hover {
+        background: rgba(255,255,255,0.2);
+      }
+      /* Hide scrollbar for Chrome, Safari and Opera */
+      .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+      }
+      /* Hide scrollbar for IE, Edge and Firefox */
+      .scrollbar-hide {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
+      }
+      
+      .diagonal-stripes-dark {
+        background-image: repeating-linear-gradient(
+            45deg,
+            #444444,
+            #444444 4px,
+            #555555 4px,
+            #555555 8px
+        );
+      }
+
+      /* UI/UX Pro Max: Global Noise Texture - Reduced opacity for cleaner look */
+      .bg-noise {
+        position: relative;
+      }
+      .bg-noise::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 50;
+        opacity: 0.015; /* Even cleaner */
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      }
+      .dark .bg-noise::before {
+        opacity: 0.03;
+        filter: invert(1);
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto !important;
+        }
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "lucide-react": "https://esm.sh/lucide-react@^0.564.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "framer-motion": "https://esm.sh/framer-motion@^12.34.0",
+    "vite": "https://esm.sh/vite@^7.3.1",
+    "url": "https://esm.sh/url@^0.11.4",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.4",
+    "@google/generative-ai": "https://esm.sh/@google/generative-ai@^0.24.1",
+    "path": "https://esm.sh/path@^0.12.7",
+    "@google/genai": "https://esm.sh/@google/genai@^1.41.0",
+    "fs": "https://esm.sh/fs@^0.0.1-security",
+    "ora": "https://esm.sh/ora@^9.3.0",
+    "commander": "https://esm.sh/commander@^14.0.3",
+    "prompts": "https://esm.sh/prompts@^2.4.2",
+    "chalk": "https://esm.sh/chalk@^5.6.2"
+  }
+}
+</script>
+</head>
+  <body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark transition-colors duration-300 min-h-screen selection:bg-primary selection:text-white bg-noise">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
