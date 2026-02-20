@@ -1,4 +1,3 @@
-
 // UI/UX Pro Max Knowledge Base
 // Ported from ui-ux-pro-max-skill-main data
 
@@ -12,6 +11,14 @@ export interface DesignStyle {
 }
 
 export const STYLES_DB: DesignStyle[] = [
+    {
+        name: "Biotech Precision",
+        keywords: ["medical", "health", "clean", "blue", "dashboard", "glass"],
+        bestFor: ["Healthcare", "Science", "Biotech", "Research"],
+        colors: ["#1193D4", "#FFFFFF", "#F0F9FF", "#0891B2"],
+        description: "Inspired by medical dashboards: clean, high-contrast, with vibrant blue accents and subtle glass textures.",
+        cssParams: { borderRadius: 16, spacingScale: 1.0, shadowStrength: "soft", iconStyle: "standard" }
+    },
     {
         name: "Cyberpunk Terminal",
         keywords: ["hacker", "terminal", "neon", "glitch", "retro-future"],

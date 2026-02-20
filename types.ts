@@ -1,6 +1,6 @@
 
 export type Language = 'en' | 'zh';
-export type ViewMode = 'classic' | 'dashboard' | 'glass' | 'admin' | 'analytics';
+export type ViewMode = 'classic' | 'dashboard' | 'glass' | 'admin' | 'analytics' | 'node';
 
 export interface ColorPalette {
   name: string;

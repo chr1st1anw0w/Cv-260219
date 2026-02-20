@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Moon, Sun, LayoutTemplate, Check, Eye, Edit3, Palette, ChevronDown, Languages, MessageSquare, Undo, Redo, BarChart2, Sparkles, Sliders, Layout } from 'lucide-react';
+import { Moon, Sun, LayoutTemplate, Check, Eye, Edit3, Palette, ChevronDown, Languages, MessageSquare, Undo, Redo, BarChart2, Sparkles, Sliders, Layout, Network } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Language, ViewMode, CustomTheme } from '../types';
 import { THEMES } from '../constants';
@@ -11,6 +11,7 @@ const VIEW_MODE_CONFIG: Record<Exclude<ViewMode, 'admin'>, { label: string; icon
   glass: { label: 'Glassmorphism' },
   dashboard: { label: 'Creative Dashboard', icon: <Layout size={12} /> },
   analytics: { label: 'Career Analytics', icon: <BarChart2 size={12} /> },
+  node: { label: 'Node Flow', icon: <Network size={12} /> }
 };
 
 interface HeaderProps {
