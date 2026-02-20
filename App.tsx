@@ -6,6 +6,8 @@ import MainContent from './components/MainContent';
 import RightSidebar from './components/RightSidebar';
 import CreativeView from './components/CreativeView';
 import GlassView from './components/GlassView';
+import NodeView from './components/NodeView';
+import ExpertView from './components/ExpertView';
 import AdminView from './components/AdminView';
 import AiAssistant from './components/AiAssistant';
 import MobileDashboard from './components/MobileDashboard';
@@ -22,7 +24,7 @@ const getInitialLayout = (): LayoutConfig => ({
   mainContentOrder: ['summary', 'values', 'projects', 'experience', 'services', 'toolkit'],
   sidebarOrder: ['profile', 'education'],
   hiddenSections: ['projects'], 
-  enabledStyles: ['classic', 'glass', 'dashboard', 'analytics'],
+  enabledStyles: ['classic', 'glass', 'dashboard', 'analytics', 'node'],
   activeTheme: 'greyscale',
   gridColumns: 3,
   gridSnap: true,
@@ -363,6 +365,14 @@ const App: React.FC = () => {
       };
   };
 
+  const handleApplyAsset = (assetType: string, url: string) => {
+      const newContent = JSON.parse(JSON.stringify(content));
+      if (assetType === 'avatar') {
+          newContent[language].personalInfo.avatar = url;
+      }
+      handleContentChange(newContent, `Apply ${assetType} asset`);
+  };
+
   const handleStyleEditorUpdate = (updatedTheme: CustomTheme) => {
       if (previewTheme) {
           setPreviewTheme(updatedTheme);
@@ -377,56 +387,47 @@ const App: React.FC = () => {
           if (layout.activeTheme === updatedTheme.id) {
               const newLayout = {
                   ...layout,
-                  designSystem: updatedTheme.designSystem ? { ...layout.designSystem, ...updatedTheme.designSystem } : layout.designSystem
+                  designSystem: updatedTheme.designSystem || layout.designSystem
               };
-              setLayout(newLayout);
-              localStorage.setItem('portfolio_layout', JSON.stringify(newLayout));
+              handleLayoutChange(newLayout, "Update custom theme design system");
           }
-      } else {
-          setPreviewTheme(updatedTheme);
-      }
-  };
-  
-  const handleApplyAsset = (field: string, value: string) => {
-      const newFullContent = JSON.parse(JSON.stringify(content));
-      if (field === 'avatar') {
-          newFullContent[language].personalInfo.avatar = value;
-          handleContentChange(newFullContent, "Updated avatar from AI");
       }
   };
 
   return (
-    <div className="min-h-screen bg-background-light dark:bg-background-dark transition-colors duration-300 font-sans h-[100dvh] overflow-hidden relative">
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-black focus:font-bold focus:rounded-lg">
-        Skip to main content
-      </a>
+    <div className={`min-h-screen transition-colors duration-500 font-sans ${isDark ? 'bg-background-dark text-white' : 'bg-background-light text-gray-900'}`}>
+      {/* Dynamic Grid Background for Classic Mode */}
+      {viewMode === 'classic' && (
+          <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+              <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#333_1px,transparent_1px)] [background-size:24px_24px] opacity-40"></div>
+              {/* Dynamic Aura Gradients */}
+              <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/5 blur-[120px] rounded-full"></div>
+              <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary/10 blur-[120px] rounded-full"></div>
+          </div>
+      )}
 
-      {/* Smart Preview Dock */}
+      {/* Comparison Overlay (Hold to Compare) */}
       <AnimatePresence>
         {previewTheme && (
             <motion.div 
-                initial={{ y: 100, opacity: 0 }} 
-                animate={{ y: 0, opacity: 1 }} 
-                exit={{ y: 100, opacity: 0 }}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-4 p-2 pl-4 bg-white/90 dark:bg-black/90 backdrop-blur-xl border border-white/20 dark:border-white/10 rounded-full shadow-2xl ring-1 ring-black/5"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: 20, opacity: 0 }}
+                className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[200] px-4"
             >
-                <div className="flex items-center gap-2 pr-2 border-r border-gray-200 dark:border-gray-700">
-                    <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                    <div className="flex flex-col">
-                        <span className="text-[10px] font-bold text-gray-500 uppercase tracking-wider leading-none">Previewing</span>
-                        <span className="text-xs font-bold text-black dark:text-white leading-none">{previewTheme.name}</span>
+                <div className="bg-white/80 dark:bg-black/80 backdrop-blur-xl border border-white/20 dark:border-white/10 p-2 rounded-full shadow-2xl flex items-center gap-3">
+                    <div className="px-4 py-1.5 border-r border-gray-200 dark:border-gray-800">
+                        <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block">Previewing Style</span>
+                        <span className="text-xs font-bold">{previewTheme.name}</span>
                     </div>
-                </div>
 
-                <div className="flex items-center gap-2">
-                     <button 
+                    <button
                         onMouseDown={() => setIsComparing(true)}
                         onMouseUp={() => setIsComparing(false)}
                         onMouseLeave={() => setIsComparing(false)}
                         onTouchStart={() => setIsComparing(true)}
                         onTouchEnd={() => setIsComparing(false)}
-                        className="px-4 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-black dark:text-white rounded-full text-xs font-bold transition-all flex items-center gap-2 active:scale-95 select-none"
+                        className="px-4 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full text-xs font-bold transition-all flex items-center gap-2 active:scale-95 select-none"
                     >
                         <RefreshCcw size={14} className={isComparing ? "animate-spin" : ""} />
                         {isComparing ? "Original" : "Hold to Compare"}
@@ -507,7 +508,6 @@ const App: React.FC = () => {
              />
         </div>
       ) : viewMode === 'analytics' ? (
-        /* Analytics Dashboard View */
         <div className="h-[calc(100vh-80px)] overflow-y-auto">
             <AnalyticsDashboard language={language} content={content[language]} />
         </div>
@@ -531,6 +531,24 @@ const App: React.FC = () => {
                     />
                 ) : viewMode === 'glass' ? (
                     <GlassView
+                        language={language}
+                        content={content[language]}
+                        fullContent={content}
+                        isEditing={isEditing}
+                        onContentUpdate={handleContentChange}
+                        layout={layout}
+                    />
+                ) : viewMode === 'node' ? (
+                    <NodeView
+                        language={language}
+                        content={content[language]}
+                        fullContent={content}
+                        isEditing={isEditing}
+                        onContentUpdate={handleContentChange}
+                        layout={layout}
+                    />
+                ) : viewMode === 'expert' ? (
+                    <ExpertView
                         language={language}
                         content={content[language]}
                         fullContent={content}

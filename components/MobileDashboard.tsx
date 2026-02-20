@@ -443,7 +443,7 @@ const MobileDashboard: React.FC<MobileDashboardProps> = ({ language, content, la
     };
 
     return (
-        <div className="flex flex-col h-full bg-[#F5F7FB] dark:bg-[#060A12] text-gray-900 dark:text-white font-sans">
+        <div className="flex flex-col h-full bg-background-light dark:bg-background-dark text-gray-900 dark:text-white font-sans">
             {/* Main Content Area */}
             <div className="flex-1 overflow-y-auto pb-24 px-4 pt-6 custom-scrollbar">
                 <AnimatePresence mode="wait">
@@ -453,7 +453,7 @@ const MobileDashboard: React.FC<MobileDashboardProps> = ({ language, content, la
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.3 }}
-                        className="grid grid-cols-2 gap-4 pb-8"
+                        className={`grid pb-8`} style={{ gridTemplateColumns: `repeat(${layout?.mobile?.columns || 2}, minmax(0, 1fr))`, gap: `${layout?.mobile?.gap || 16}px` }}
                     >
                         {activeBlocks.map(renderBlock)}
                     </motion.div>
@@ -465,9 +465,9 @@ const MobileDashboard: React.FC<MobileDashboardProps> = ({ language, content, la
                 <div className="bg-gray-900 dark:bg-white/10 backdrop-blur-xl rounded-full p-1.5 flex shadow-2xl border border-white/10 max-w-sm mx-auto">
                     <button 
                         onClick={() => setActiveTab('profile')}
-                        className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-full text-xs font-bold transition-all duration-300 ${
+                        className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-full text-sm font-bold transition-all duration-300 ${
                             activeTab === 'profile' 
-                            ? 'bg-white text-black shadow-sm scale-100' 
+                            ? 'bg-primary text-black shadow-sm scale-100'
                             : 'text-gray-400 dark:text-gray-400 hover:text-white'
                         }`}
                     >
@@ -476,9 +476,9 @@ const MobileDashboard: React.FC<MobileDashboardProps> = ({ language, content, la
                     </button>
                     <button 
                         onClick={() => setActiveTab('resume')}
-                        className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-full text-xs font-bold transition-all duration-300 ${
+                        className={`flex-1 flex items-center justify-center gap-2 py-4 rounded-full text-sm font-bold transition-all duration-300 ${
                             activeTab === 'resume' 
-                            ? 'bg-white text-black shadow-sm scale-100' 
+                            ? 'bg-primary text-black shadow-sm scale-100'
                             : 'text-gray-400 dark:text-gray-400 hover:text-white'
                         }`}
                     >

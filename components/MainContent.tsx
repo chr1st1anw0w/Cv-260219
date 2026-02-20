@@ -486,6 +486,7 @@ const MainContent: React.FC<MainContentProps> = ({
     const cols = currentLayout?.gridColumns || 3;
     // Tailwind doesn't support dynamic classes like `grid-cols-${cols}`
     const gridMap: Record<number, string> = {
+        0: "md:grid-cols-12",
         1: 'md:grid-cols-1',
         2: 'md:grid-cols-2',
         3: 'md:grid-cols-3',

@@ -30,7 +30,7 @@ const Card: React.FC<CardProps> = ({
 
   // Styles based on variant
   const classicStyles = "bg-card-light dark:bg-card-dark shadow-soft border border-gray-100 dark:border-gray-800";
-  const glassStyles = "bg-white/80 dark:bg-[#1E1E1E]/80 backdrop-blur-xl border border-white/40 dark:border-white/10 shadow-lg";
+  const glassStyles = "bg-white/70 dark:bg-[#0D0D0D]/80 backdrop-blur-xl border border-white/40 dark:border-white/10 shadow-lg";
 
   return (
     <motion.div
@@ -44,7 +44,7 @@ const Card: React.FC<CardProps> = ({
         y: scrollTrigger ? 0 : -5, 
         boxShadow: "0 10px 30px -10px rgba(0,0,0,0.1)" 
       } : {}}
-      className={`rounded-3xl p-6 transition-colors ${variant === 'glass' ? glassStyles : classicStyles} ${className}`}
+      className={`rounded-xl p-6 transition-colors ${variant === 'glass' ? glassStyles : classicStyles} ${className}`}
       {...props}
     >
       {children}

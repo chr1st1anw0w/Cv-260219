@@ -11,11 +11,11 @@ const GlassCard: React.FC<GlassCardProps> = ({ children, className = '', noPaddi
   return (
     <div 
       className={`
-        bg-white/80 dark:bg-[#1E1E1E]/80 
+        bg-white/70 dark:bg-[#0D0D0D]/80
         backdrop-blur-xl 
-        border border-white/40 dark:border-white/10 
+        border border-black/5 dark:border-white/10
         shadow-soft dark:shadow-none
-        rounded-3xl 
+        rounded-2xl
         transition-all duration-300 hover:shadow-lg
         ${noPadding ? 'p-0' : 'p-6'} 
         ${className}
