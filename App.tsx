@@ -7,6 +7,7 @@ import RightSidebar from './components/RightSidebar';
 import CreativeView from './components/CreativeView';
 import GlassView from './components/GlassView';
 import NodeView from './components/NodeView';
+import ExpertView from './components/ExpertView';
 import AdminView from './components/AdminView';
 import AiAssistant from './components/AiAssistant';
 import MobileDashboard from './components/MobileDashboard';
@@ -539,6 +540,15 @@ const App: React.FC = () => {
                     />
                 ) : viewMode === 'node' ? (
                     <NodeView
+                        language={language}
+                        content={content[language]}
+                        fullContent={content}
+                        isEditing={isEditing}
+                        onContentUpdate={handleContentChange}
+                        layout={layout}
+                    />
+                ) : viewMode === 'expert' ? (
+                    <ExpertView
                         language={language}
                         content={content[language]}
                         fullContent={content}

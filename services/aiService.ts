@@ -202,8 +202,53 @@ export const onePageMagician = async (objective: string, wordCount?: number): Pr
 };
 
 // --- RESUME EXPERT AGENT ---
-export const resumeExpertAgent = async (currentContent: any, targetJD: string, language: string = 'en'): Promise<any> => {
-    return { keywords: {}, gapAnalysis: {}, summaryRewrite: {}, experienceRewrite: [], skillAlignment: {}, atsChecklist: {} };
+export const resumeExpertAgent = async (currentContent: any, targetJD: string, language: string = "en"): Promise<any> => {
+    const systemInstruction = `
+        You are an elite Career Strategy Consultant and ATS (Applicant Tracking System) Expert.
+        Your task is to analyze the user's resume against a target Job Description (JD) and provide structured, high-impact feedback.
+
+        Analyze based on:
+        1. **Match Score**: 0-100 percentage.
+        2. **Semantic Gap**: Identify missing high-impact keywords.
+        3. **Experience Optimization**: How to rephrase achievements to match JD requirements.
+        4. **Skill Vector**: Distribution across Work, Data, Tech, and Execution.
+
+        Return a JSON object:
+        {
+            "matchScore": number,
+            "alignment": "Strong" | "Good" | "Moderate" | "Gap Detected",
+            "strengths": [
+                { "title": "...", "description": "..." }
+            ],
+            "gaps": [
+                { "title": "...", "description": "..." }
+            ],
+            "skillVector": {
+                "WORK": number,
+                "DATA": number,
+                "EXECUTION": number,
+                "TECH": number
+            },
+            "summarySuggestion": "...",
+            "atsChecklist": [
+                { "item": "...", "status": "pass" | "fail" }
+            ]
+        }
+    `;
+
+    const prompt = `
+        Target Job Description: ${targetJD}
+        Current Resume (Language: ${language}): ${JSON.stringify(currentContent)}
+    `;
+
+    const response = await generateAIResponse({
+        model: "gemini-3-flash-preview",
+        prompt,
+        systemInstruction,
+        responseMimeType: "application/json"
+    });
+
+    return parseAIJson(response.text);
 };
 
 // --- EXPERIENCE ENHANCER AGENT ---
